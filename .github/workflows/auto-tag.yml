@@ -1,0 +1,18 @@
+name: Auto Tag my Application
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    outputs:
+      new_tag: ${{ steps.tagging.outputs.new_tag }}  # Explicitly define the job output
+    steps:
+      - uses: actions/checkout@v4
+      - uses: phish108/autotag-action@v1.1.64
+        id: tagging
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          with-v: true  # Add 'v' prefix to the tag (e.g., v1.0.0)

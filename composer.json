@@ -1,0 +1,46 @@
+{
+    "name": "samosadlaker/statamic-maintenance",
+    "description": "Statamic Maintance addon",
+    "type": "statamic-addon",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Samosadlaker",
+            "email": "dev@samosadlaker.eu"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "SamoSadlaker\\StatamicMaintenance\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SamoSadlaker\\StatamicMaintenance\\Tests\\": "tests"
+        }
+    },
+    "require": {
+        "statamic/cms": "^4.0|^5.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^9.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "pixelfear/composer-dist-plugin": true
+        }
+    },
+    "extra": {
+        "statamic": {
+            "name": "Statamic Maintenance",
+            "description": "Statamic Maintenance addon"
+        },
+        "laravel": {
+            "providers": [
+                "SamoSadlaker\\StatamicMaintenance\\ServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

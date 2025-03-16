@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title ?? site:name }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        ol{
+            list-style-type: decimal !important;
+        }
+        ul{
+            list-style-type: disc !important;
+        }
+        ol li, ul li{
+            margin-bottom: 0.5rem;
+            margin-left: 1rem;
+        }
+        h2{
+            font-size: 1.5rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        h3{
+            font-size: 1.25rem;
+            margin-top: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+        blockquote{
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding-left: 1rem;
+            border-left: 4px solid #e2e8f0;
+        }
+    </style>
+</head>
+
+<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+<div class="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
+    <div class="max-w-3xl w-full text-center space-y-6">
+        <h1 class="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-gray-100">
+            {{ title ?? 'Maintenance Mode' }}
+        </h1>
+
+        {{if maintenance_message}}
+        <div class="prose prose-lg dark:prose-invert max-w-none text-left">
+            {{ maintenance_message ?? 'We are currently performing maintenance. Please check back later.' }}
+        </div>
+        {{/if}}
+    </div>
+</div>
+</body>
+
+</html>
