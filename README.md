@@ -1,5 +1,7 @@
 # Statamic Maintenance
 
+![last tag](https://img.shields.io/github/v/tag/samosadlaker/statamic-maintenance?style=flat-square)
+
 Maintenance addon for Statamic inspired by [plugrbase/statamic-maintenance-mode](https://github.com/plugrbase/statamic-maintenance-mode)
 
 This addon allows you to put your site into maintenance mode. When maintenance mode is enabled, your site will display a maintenance page to all visitors except those with the `super` role.
