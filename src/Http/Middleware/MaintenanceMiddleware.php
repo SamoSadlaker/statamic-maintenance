@@ -2,7 +2,6 @@
 
 namespace SamoSadlaker\StatamicMaintenance\Http\Middleware;
 
-use Illuminate\Support\Str;
 use SamoSadlaker\StatamicMaintenance\Maintenance;
 
 class MaintenanceMiddleware
@@ -17,21 +16,22 @@ class MaintenanceMiddleware
    */
   public function handle($request, $next)
   {
-    $url = Str::start($request->getRequestUri(), '/');
     $maintenance = new Maintenance();
     if (auth()->user() && (auth()->user()->isSuper() || auth()->user()->hasPermission("access cp"))) {
       return $next($request);
     }
-    if($maintenance->isEnabled() === false && $url == '/maintenance'){
-        return redirect('/');
+
+    $currentRoute = $request->route()->getName();
+    if ($maintenance->isEnabled() === false && $currentRoute === 'maintenance') {
+      return redirect('/');
     }
-    if($maintenance->isEnabled() === false){
-        return $next($request);
-    }
-    if ($maintenance->isEnabled() === true && $url == '/maintenance') {
+    if ($maintenance->isEnabled() === false) {
       return $next($request);
     }
-    if ($maintenance->isEnabled() === true && $url != '/maintenance') {
+    if ($maintenance->isEnabled() === true && $currentRoute === 'maintenance') {
+      return $next($request);
+    }
+    if ($maintenance->isEnabled() === true && $currentRoute !== 'maintenance') {
       return redirect('maintenance');
     }
     return $next($request);

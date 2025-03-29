@@ -7,6 +7,13 @@ Maintenance addon for Statamic inspired by [plugrbase/statamic-maintenance-mode]
 This addon allows you to put your site into maintenance mode. When maintenance mode is enabled, your site will display a maintenance page to all visitors except those with the `super` role.
 
 You can customize the maintenance page or use the default one.
+
+## Features
+- Simple and quick setup
+- Fully customizable to suit your needs
+- Integrated Bard field for rich text formatting
+- Supports dark mode for a sleek appearance
+
 ## Installation
 
 You can install this addon via Composer:
