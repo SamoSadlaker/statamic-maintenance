@@ -3,6 +3,7 @@
 namespace SamoSadlaker\StatamicMaintenance\Http\Middleware;
 
 use SamoSadlaker\StatamicMaintenance\Maintenance;
+use \Statamic\Facades\User;
 
 class MaintenanceMiddleware
 {
@@ -17,10 +18,10 @@ class MaintenanceMiddleware
   public function handle($request, $next)
   {
     $maintenance = new Maintenance();
-    if (auth()->user() && (auth()->user()->isSuper() || auth()->user()->hasPermission("access cp"))) {
+    $user = User::fromUser(auth()->user());
+    if (auth()->user() && ($user->isSuper() || $user->hasPermission('access cp'))) {
       return $next($request);
     }
-
     $currentRoute = $request->route()->getName();
     if ($maintenance->isEnabled() === false && $currentRoute === 'maintenance') {
       return redirect('/');
