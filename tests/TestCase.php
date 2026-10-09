@@ -1,8 +1,8 @@
 <?php
 
-namespace Samosadlaker\StatamicMaintenance\Tests;
+namespace SamoSadlaker\StatamicMaintenance\Tests;
 
-use Samosadlaker\StatamicMaintenance\ServiceProvider;
+use SamoSadlaker\StatamicMaintenance\ServiceProvider;
 use Statamic\Testing\AddonTestCase;
 
 abstract class TestCase extends AddonTestCase
