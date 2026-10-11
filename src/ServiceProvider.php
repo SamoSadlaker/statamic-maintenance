@@ -21,13 +21,11 @@ class ServiceProvider extends AddonServiceProvider
     ];
     public function bootAddon()
     {
-        parent::boot();
-
         Nav::extend(function ($nav) {
             $nav->create('Maintenance')
                 ->section('Tools')
                 ->route('samosadlaker.maintenance.index')
-                ->icon('shield-key');
+                ->icon('utilities');
         });
 
         $this->publishes([

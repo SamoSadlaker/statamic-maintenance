@@ -1,48 +1,41 @@
 <?php
+
 namespace SamoSadlaker\StatamicMaintenance\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
 use SamoSadlaker\StatamicMaintenance\Blueprints\MaintenanceBlueprint;
 use SamoSadlaker\StatamicMaintenance\Maintenance;
+use Statamic\CP\PublishForm;
 use Statamic\Http\Controllers\CP\CpController;
 
 class AdminMaintenanceController extends CpController
 {
-    public function __construct(Request $request)
+    /**
+     * Display the maintenance settings page.
+     *
+     * Statamic 6 ships a built-in PublishForm that renders the standard
+     * Control Panel publish form (header, tabs, save button, validation
+     * and success toast) straight from a blueprint. No custom assets needed.
+     */
+    public function index()
     {
-        parent::__construct($request);
+        return PublishForm::make((new MaintenanceBlueprint)())
+            ->title('Maintenance settings')
+            ->icon('utilities')
+            ->values((new Maintenance())->getValues())
+            ->submittingTo(cp_route('samosadlaker.maintenance.update'), 'PUT');
     }
-  /**
-   * Display the maintenance settings page.
-   *
-   * @return View
-   */
-  public function index(): View
-  {
-    $blueprint = new MaintenanceBlueprint();
-    $fields = $blueprint()->fields()->preProcess();
-    $values = (new Maintenance())->getValues() ?? $fields->values();
-
-    return view('statamic-maintenance::cp.index', [
-      'blueprint' => $blueprint()->toPublishArray(),
-      'values' => $values,
-      'meta' => $fields->meta(),
-    ]);
-  }
 
     /**
      * Update the maintenance settings.
-     *
-     * @param Request $request
-     * @return true
      */
-    public function update(Request $request)
+    public function update(Request $request): JsonResponse
     {
-        $blueprint = new MaintenanceBlueprint();
-        $fields = $blueprint()->fields()->addValues($request->all());
-        $fields->validate();
-        (new Maintenance())->save($fields->process()->values()->all());
-        return true;
+        $values = PublishForm::make((new MaintenanceBlueprint)())->submit($request->all());
+
+        (new Maintenance())->save($values);
+
+        return response()->json(['saved' => true]);
     }
 }
