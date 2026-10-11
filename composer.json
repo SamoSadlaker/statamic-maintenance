@@ -28,7 +28,8 @@
     "config": {
         "allow-plugins": {
             "pixelfear/composer-dist-plugin": true
-        }
+        },
+        "non-feature-branches": ["master", "develop"]
     },
     "extra": {
         "statamic": {

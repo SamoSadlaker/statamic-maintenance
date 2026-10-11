@@ -71,6 +71,10 @@ Run tests locally:
 vendor/bin/phpunit -c phpunit.xml
 ```
 
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for a list of changes in each release.
+
 ## Showcase
 
 ![control panel](https://i.imgur.com/VE2pZM4.png)
